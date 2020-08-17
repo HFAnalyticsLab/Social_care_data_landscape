@@ -41,5 +41,5 @@ To be added.
 
 ## Related work 
 
-Future Care Capital have been publishing regular updates of their [Social Care Data Finder Project](https://futurecarecapital.org.uk/research/social-care-data-finder/), which provides links to social care datasets that have been openly published in the UK <ins>since January 1 2020<ins>. In addition to a large number of national data sources, the Social Care Data Finder includes information on availability and accessibility of local datasets on adult social care from 155 councils.
+Future Care Capital have been publishing regular updates of their [Social Care Data Finder Project](https://futurecarecapital.org.uk/research/social-care-data-finder/), which provides links to social care datasets that have been openly published in the UK <ins>since January 1 2020</ins>. In addition to a large number of national data sources, the Social Care Data Finder includes information on availability and accessibility of local datasets on adult social care from 155 councils.
 
