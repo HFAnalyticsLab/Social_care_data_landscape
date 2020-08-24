@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Merriweather:400,900|Fjalla+One|Caveat");
+
+// Stylesheet for default litvis formatting.
+// V11, 23rd October, 2019
+
+#litvis {
+  @fSize: 11pt;
+
+  font-family: "Merriweather", serif;
+  font-size: @fSize;
+  font-weight: 400;
+  line-height: 1.45;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Fjalla One", sans-serif;
+  }
+
+  blockquote {
+    font-family: "Merriweather", serif;
+    font-weight: 900;
+    font-size: 1.1 * @fSize;
+    background-color: #f6f6f6;
+    margin-right: 2em;
+  }
+
+  blockquote h1,
+  blockquote h2,
+  blockquote h3,
+  blockquote h4,
+  blockquote h5,
+  blockquote h6 {
+    font-family: "Merriweather", serif;
+    font-weight: 900;
+  }
+
+  code,
+  pre {
+    background-color: rgba(255, 255, 255, 0);
+  }
+
+  pre {
+    border: solid 1px #ccc;
+    border-radius: 8px;
+  }
+
+  div[data-role="litvisOutput"] > span {
+    font-family: iosevka, monospace;
+    font-weight: bold;
+    font-size: 1.6 * @fSize;
+    display: block;
+    margin-bottom: 0.75em;
+    border-style: none none none solid;
+    border-width: 1px;
+    border-color: #ccc;
+    padding-left: 0.5em;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"],
+  input[type="select"],
+  .vega-bind {
+    position: absolute;
+    top: 50px;
+    left: 500px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+  }
+  input[type="range"] {
+    margin-left: 1em;
+  }
+
+  input[type="range"] {
+    min-width: 120px;
+    max-width: 120px;
+  }
+}

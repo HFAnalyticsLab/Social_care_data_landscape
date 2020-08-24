@@ -1,0 +1,962 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {
+    "url": "../data/dm_map_msr_joined_v1.31.csv"
+  },
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "vconcat": [
+    {
+      "width": 1500,
+      "height": 300,
+      "layer": [
+        {
+          "mark": "rect",
+          "encoding": {
+            "y": {
+              "field": "dm_l1_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l1",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 1)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            },
+            "color": {
+              "field": "msr_id",
+              "type": "quantitative",
+              "aggregate": "valid",
+              "legend": null,
+              "scale": {
+                "range": ["hsl(0,5%,90%)", "hsl(0,5%,100%)"]
+              }
+            },
+            "tooltip": [
+              {
+                "field": "msr_id",
+                "type": "quantitative",
+                "aggregate": "valid",
+                "title": "Number of measure mappings in domain. NB: at levels 1 and 2, those in the same phase are hidden behind each other."
+              }
+            ]
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "line",
+            "color": "lightgray",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "detail": {
+              "field": "msr_id",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "msr_id",
+              "type": "nominal",
+              "sort": {
+                "field": "sort_value",
+                "op": "min",
+                "order": "ascending"
+              },
+              "axis": {
+                "labels": false,
+                "ticks": false,
+                "domain": false,
+                "title": [
+                  "",
+                  "Each vertical is a publicly available measure. Hover over the coloured mappings for details; brush over them to filter the chart below; change the horizontal sort order using the drop-down above; click the legend to filter."
+                ]
+              }
+            },
+            "y": {
+              "field": "dm_l1_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l1",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 1)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            }
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "point",
+            "shape": "square",
+            "size": 1000,
+            "strokeWidth": 0
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            },
+            {
+              "filter": "datum.msr_strength_l1_fix != 0.0"
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "msr_id",
+              "type": "nominal",
+              "sort": {
+                "field": "sort_value",
+                "op": "min",
+                "order": "ascending"
+              },
+              "axis": {
+                "labels": false,
+                "ticks": false,
+                "domain": false,
+                "title": [
+                  "",
+                  "Each vertical is a publicly available measure. Hover over the coloured mappings for details; brush over them to filter the chart below; change the horizontal sort order using the drop-down above; click the legend to filter."
+                ]
+              }
+            },
+            "y": {
+              "field": "dm_l1_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l1",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 1)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            },
+            "shape": {
+              "field": "dm_phase",
+              "type": "nominal",
+              "scale": {
+                "domain": ["demand", "supply", "operate", "outcome"],
+                "range": [
+                  "M -0.05,-1.0 H 0.05 V-0.50 H-0.05 z",
+                  "M -0.05,-0.5 H 0.05 V 0.00 H-0.05 z",
+                  "M -0.05,0.0  H 0.05 V 0.50 H-0.05 z",
+                  "M -0.05,0.5  H 0.05 V 1.00 H-0.05 z"
+                ]
+              },
+              "legend": null
+            },
+            "fill": {
+              "condition": {
+                "selection": "selBrushL1",
+                "field": "dm_phase",
+                "type": "nominal",
+                "scale": {
+                  "domain": ["demand", "supply", "operate", "outcome"],
+                  "range": ["red", "orange", "blue", "green"]
+                },
+                "title": "THF Domain Phase (shift/click)"
+              },
+              "value": "lightgray"
+            },
+            "opacity": {
+              "field": "msr_strength",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0.1, 1],
+                "range": [0, 1]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "src_org",
+                "type": "nominal",
+                "title": "Org"
+              },
+              {
+                "field": "src_name",
+                "type": "nominal",
+                "title": "Source"
+              },
+              {
+                "field": "msr_name",
+                "type": "nominal",
+                "title": "Measure"
+              },
+              {
+                "field": "msr_strength",
+                "type": "quantitative",
+                "title": "Measure strength"
+              },
+              {
+                "field": "dm_l1_name",
+                "type": "nominal",
+                "title": "Level 1 domain"
+              },
+              {
+                "field": "dm_phase",
+                "type": "nominal",
+                "title": "Level 3 domain phase"
+              },
+              {
+                "field": "msr_id",
+                "type": "quantitative",
+                "title": "Our measure id"
+              }
+            ]
+          },
+          "selection": {
+            "selSortOrder": {
+              "type": "single",
+              "fields": ["sort_by"],
+              "bind": {
+                "sort_by": {
+                  "input": "select",
+                  "options": ["msr_strength", "phase_bitmap"],
+                  "name": "Sort measures horizontally by "
+                }
+              },
+              "init": {
+                "sort_by": "msr_strength"
+              }
+            },
+            "selLegend": {
+              "type": "multi",
+              "bind": "legend",
+              "fields": ["dm_phase"]
+            },
+            "selBrushL1": {
+              "type": "interval"
+            }
+          }
+        }
+      ],
+      "resolve": {
+        "legend": {
+          "shape": "independent"
+        },
+        "scale": {
+          "color": "independent",
+          "shape": "independent",
+          "y": "shared",
+          "x": "shared"
+        }
+      }
+    },
+    {
+      "width": 1500,
+      "height": 0,
+      "layer": [
+        {
+          "mark": {
+            "type": "rect",
+            "stroke": "lightgray",
+            "strokeWidth": 1,
+            "strokeOpacity": 0.5
+          },
+          "encoding": {
+            "y": {
+              "field": "dm_l1_l2_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l2",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 2)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            },
+            "color": {
+              "field": "msr_id",
+              "type": "quantitative",
+              "aggregate": "valid",
+              "legend": null,
+              "scale": {
+                "range": ["hsl(0,5%,90%)", "hsl(0,5%,100%)"]
+              }
+            },
+            "tooltip": [
+              {
+                "field": "msr_id",
+                "type": "quantitative",
+                "aggregate": "valid",
+                "title": "Number of measure mappings in domain. NB: at levels 1 and 2, those in the same phase are hidden behind each other."
+              }
+            ]
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL1"
+              }
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "line",
+            "color": "lightgray",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "detail": {
+              "field": "msr_id",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "msr_id",
+              "type": "nominal",
+              "sort": {
+                "field": "sort_value",
+                "op": "min",
+                "order": "ascending"
+              },
+              "axis": {
+                "labels": false,
+                "ticks": false,
+                "domain": false,
+                "title": ""
+              }
+            },
+            "y": {
+              "field": "dm_l1_l2_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l2",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 2)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            }
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL1"
+              }
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "point",
+            "shape": "square",
+            "size": 1000,
+            "strokeWidth": 0
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            },
+            {
+              "filter": "datum.msr_strength_l2_fix != 0.0"
+            },
+            {
+              "filter": {
+                "selection": "selBrushL1"
+              }
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "msr_id",
+              "type": "nominal",
+              "sort": {
+                "field": "sort_value",
+                "op": "min",
+                "order": "ascending"
+              },
+              "axis": {
+                "labels": false,
+                "ticks": false,
+                "domain": false,
+                "title": ""
+              }
+            },
+            "y": {
+              "field": "dm_l1_l2_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l2",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 2)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            },
+            "shape": {
+              "field": "dm_phase",
+              "type": "nominal",
+              "scale": {
+                "domain": ["demand", "supply", "operate", "outcome"],
+                "range": [
+                  "M -0.05,-0.5 H 0.05 V 0.00 H-0.05 z",
+                  "M -0.05,-0.5 H 0.05 V 0.00 H-0.05 z",
+                  "M -0.05,0.0  H 0.05 V 0.50 H-0.05 z",
+                  "M -0.05,0.0  H 0.05 V 0.50 H-0.05 z"
+                ]
+              },
+              "legend": null
+            },
+            "fill": {
+              "condition": {
+                "selection": "selBrushL2",
+                "field": "dm_phase",
+                "type": "nominal",
+                "scale": {
+                  "domain": ["demand", "supply", "operate", "outcome"],
+                  "range": ["red", "orange", "blue", "green"]
+                },
+                "title": "THF Domain Phase (shift/click)"
+              },
+              "value": "lightgray"
+            },
+            "opacity": {
+              "field": "msr_strength",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0.1, 1],
+                "range": [0, 1]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "src_org",
+                "type": "nominal",
+                "title": "Org"
+              },
+              {
+                "field": "src_name",
+                "type": "nominal",
+                "title": "Source"
+              },
+              {
+                "field": "msr_name",
+                "type": "nominal",
+                "title": "Measure"
+              },
+              {
+                "field": "msr_strength",
+                "type": "quantitative",
+                "title": "Measure strength"
+              },
+              {
+                "field": "dm_l1_name",
+                "type": "nominal",
+                "title": "Level 1 domain"
+              },
+              {
+                "field": "dm_l2_name",
+                "type": "nominal",
+                "title": "Level 2 domain"
+              },
+              {
+                "field": "dm_phase",
+                "type": "nominal",
+                "title": "Level 3 domain phase"
+              },
+              {
+                "field": "msr_id",
+                "type": "quantitative",
+                "title": "Our measure id"
+              }
+            ]
+          },
+          "selection": {
+            "selSortOrder": {
+              "type": "single",
+              "fields": ["sort_by"],
+              "bind": {
+                "sort_by": {
+                  "input": "select",
+                  "options": ["msr_strength", "phase_bitmap"],
+                  "name": "Sort measures horizontally by "
+                }
+              },
+              "init": {
+                "sort_by": "msr_strength"
+              }
+            },
+            "selLegend": {
+              "type": "multi",
+              "bind": "legend",
+              "fields": ["dm_phase"]
+            },
+            "selBrushL2": {
+              "type": "interval"
+            }
+          }
+        }
+      ],
+      "resolve": {
+        "legend": {
+          "shape": "independent"
+        },
+        "scale": {
+          "color": "independent",
+          "shape": "independent",
+          "y": "shared",
+          "x": "shared"
+        }
+      }
+    },
+    {
+      "width": 1500,
+      "height": 0,
+      "layer": [
+        {
+          "mark": {
+            "type": "rect",
+            "stroke": "lightgray",
+            "strokeWidth": 1,
+            "strokeOpacity": 0.5
+          },
+          "encoding": {
+            "y": {
+              "field": "dm_l1_l3_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l3",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 3)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            },
+            "color": {
+              "field": "msr_id",
+              "type": "quantitative",
+              "aggregate": "valid",
+              "legend": null,
+              "scale": {
+                "range": ["hsl(0,5%,90%)", "hsl(0,5%,100%)"]
+              }
+            },
+            "tooltip": [
+              {
+                "field": "msr_id",
+                "type": "quantitative",
+                "aggregate": "valid",
+                "title": "Number of measure mappings in domain. NB: at levels 1 and 2, those in the same phase are hidden behind each other."
+              }
+            ]
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL2"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL1"
+              }
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "line",
+            "color": "lightgray",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "detail": {
+              "field": "msr_id",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "msr_id",
+              "type": "nominal",
+              "sort": {
+                "field": "sort_value",
+                "op": "min",
+                "order": "ascending"
+              },
+              "axis": {
+                "labels": false,
+                "ticks": false,
+                "domain": false,
+                "title": ""
+              }
+            },
+            "y": {
+              "field": "dm_l1_l3_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l3",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 3)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            }
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL2"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL1"
+              }
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "point",
+            "shape": "square",
+            "size": 1000,
+            "strokeWidth": 0
+          },
+          "transform": [
+            {
+              "fold": ["msr_strength", "phase_bitmap"],
+              "as": ["sort_by", "sort_value"]
+            },
+            {
+              "filter": {
+                "selection": "selSortOrder"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selLegend"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL2"
+              }
+            },
+            {
+              "filter": {
+                "selection": "selBrushL1"
+              }
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "msr_id",
+              "type": "nominal",
+              "sort": {
+                "field": "sort_value",
+                "op": "min",
+                "order": "ascending"
+              },
+              "axis": {
+                "labels": false,
+                "ticks": false,
+                "domain": false,
+                "title": ""
+              }
+            },
+            "y": {
+              "field": "dm_l1_l3_name",
+              "type": "nominal",
+              "sort": {
+                "field": "dm_sort_l3",
+                "op": "min",
+                "order": "descending"
+              },
+              "axis": {
+                "title": "THF Domain Dimension (Level 3)",
+                "titleAngle": 0,
+                "titleAlign": "right",
+                "titleX": -8,
+                "titleY": 0,
+                "labelLimit": 200
+              }
+            },
+            "shape": {
+              "field": "dm_phase",
+              "type": "nominal",
+              "scale": {
+                "domain": ["demand", "supply", "operate", "outcome"],
+                "range": [
+                  "M -0.05,-0.25 H 0.05 V 0.25 H-0.05 z",
+                  "M -0.05,-0.25 H 0.05 V 0.25 H-0.05 z",
+                  "M -0.05,-0.25 H 0.05 V 0.25 H-0.05 z",
+                  "M -0.05,-0.25 H 0.05 V 0.25 H-0.05 z"
+                ]
+              },
+              "legend": null
+            },
+            "fill": {
+              "field": "dm_phase",
+              "type": "nominal",
+              "scale": {
+                "domain": ["demand", "supply", "operate", "outcome"],
+                "range": ["red", "orange", "blue", "green"]
+              },
+              "title": "THF Domain Phase (shift/click)",
+              "legend": {
+                "orient": "top"
+              }
+            },
+            "opacity": {
+              "field": "msr_strength",
+              "type": "quantitative",
+              "scale": {
+                "domain": [0.1, 1],
+                "range": [0, 1]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "src_org",
+                "type": "nominal",
+                "title": "Org"
+              },
+              {
+                "field": "src_name",
+                "type": "nominal",
+                "title": "Source"
+              },
+              {
+                "field": "msr_name",
+                "type": "nominal",
+                "title": "Measure"
+              },
+              {
+                "field": "msr_strength",
+                "type": "quantitative",
+                "title": "Measure strength"
+              },
+              {
+                "field": "dm_l1_name",
+                "type": "nominal",
+                "title": "Level 1 domain"
+              },
+              {
+                "field": "dm_l2_name",
+                "type": "nominal",
+                "title": "Level 2 domain"
+              },
+              {
+                "field": "dm_l3_name",
+                "type": "nominal",
+                "title": "Level 3 domain"
+              },
+              {
+                "field": "dm_phase",
+                "type": "nominal",
+                "title": "Level 3 domain phase"
+              },
+              {
+                "field": "msr_id",
+                "type": "quantitative",
+                "title": "Our measure id"
+              }
+            ]
+          },
+          "selection": {
+            "selSortOrder": {
+              "type": "single",
+              "fields": ["sort_by"],
+              "bind": {
+                "sort_by": {
+                  "input": "select",
+                  "options": ["msr_strength", "phase_bitmap"],
+                  "name": "Sort measures horizontally by "
+                }
+              },
+              "init": {
+                "sort_by": "msr_strength"
+              }
+            },
+            "selLegend": {
+              "type": "multi",
+              "bind": "legend",
+              "fields": ["dm_phase"]
+            }
+          }
+        }
+      ],
+      "resolve": {
+        "legend": {
+          "shape": "independent"
+        },
+        "scale": {
+          "color": "independent",
+          "shape": "independent",
+          "y": "shared",
+          "x": "shared"
+        }
+      }
+    }
+  ],
+  "title": {
+    "text": [
+      "Adult Social Care in England",
+      "Publicly available measures mapped to The Health Foundation three-level domain model."
+    ],
+    "anchor": "middle"
+  }
+}

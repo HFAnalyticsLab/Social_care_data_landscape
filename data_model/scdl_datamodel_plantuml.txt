@@ -1,0 +1,124 @@
+'Render this data model at http://www.plantuml.com/plantuml
+
+@startuml
+' avoid problems with angled crows feet
+skinparam linetype ortho
+skinparam monochrome true
+'left to right direction
+
+entity "domain_model_l1" as dml1{
+  *dm_l1_id
+  --
+  *dm_l1_name
+  *dm_sort_l1
+
+}
+
+note left
+  The THF Domain model
+  has 6 dimensions at level 1:
+  Users, Unpaid Carers, Workforce,
+  Services, Providers, Funders.
+end note
+
+entity "domain_model_l2" as dml2{
+  *dm_l2_id
+  --
+  *dm_l2_id_name
+  *dm_sort_l2
+
+}
+
+note left
+  ... sub-divided into 34
+  dimensions at level 2
+  (e.g. User:Demographics)...
+end note
+
+entity "domain_model_l3" as dml3{
+  *dm_l3_id
+  --
+  *dm_l3_id_name
+  *dm_sort_l3
+  *dm_phase
+}
+
+note left
+  ... and 100 at level 3
+  (e.g,User:Demographics:Ethnicity)
+  Here we introduce Domain Phase
+  (demand, supply, operate, outcome).
+end note
+
+entity "domainmodel_measure_map" as dm_msr_map{
+  *dm_l3_id
+  *msr_id
+  --
+}
+
+note top
+  We created 1,328 mappings from
+  the domain model to the measures.
+end note
+
+entity "measure" as msr{
+  *msr_id
+  --
+  *msr_name
+  msr_section
+  msr_table
+  *msr_data_url
+  *msr_population_or_survey
+  msr_survey size
+  *msr_min_geo_resolution
+  *msr_strength
+
+}
+
+note top
+  There are 351 individual measures,
+  e.g. "Long Term Gross Current
+  Expenditure by Support Setting".
+  The population/survey flag and
+  geo resolution also contribute
+  to the measure strength.
+end note
+
+entity "source" as src{
+  *src_id
+  --
+  *src_org
+  *src_name
+  *src_url
+  *src_year_first_published
+  *src_year_last_published
+  *src_discontinuity
+  *src_pub_frequency
+  *src_pub_lag_months
+  *src_data_provider
+  *src_statistic_class
+  *src_methodology_url
+  *src_quality_url
+}
+
+note left
+  Identified from major analysis
+  reports (e.g. Kings Fund 360)
+  we analysed 30 referenced public
+  sources (e.g. NHS Digital ASCOF).
+  Eight of these attributes
+  contribute to measure strength.
+end note
+
+dml1 ||..|{ dml2
+dml2 ||..|{ dml3
+dml3 ||-right..o{ dm_msr_map
+dm_msr_map}o-right..|| msr
+msr }|-up..|| src
+
+legend bottom
+The data feed to the visualisation is an inner join across domain_model_l1/2/3,
+left outer joined to domainmodel_measure_map (to preserve
+dimensions with no measures mapped), inner joined to measure and source.
+endlegend
+@enduml
