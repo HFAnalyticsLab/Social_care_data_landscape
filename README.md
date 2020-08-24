@@ -22,11 +22,11 @@ Data sources were identified through the report listed in the References section
 
 ## Visualisations 
 
-To be added. 
+This interactive, exploratory [visualisation](https://github.com/HFAnalyticsLab/Social_care_data_landscape/blob/master/site/scdl_vis.html) shows our attempt to visualise the complex nature of available measures on adult social care. Individual measures are mapped against the adult social care pathway on three levels with inceasing granularity. At level 1, this consists of the main service and stakeholder groups including users, unpaid carers, workforce, the provided service, providers and funders. Vertical lines  show how measures can be used to explore relationships  between different parts of the social care pathway. Measures are grouped according to whether they relate to demand, supply, operations or outcome and the opacity is based simple scoring algorithm for measure strength based  on population  or survey size, time lag and geographical  resolution. The number of measures related to each parth of the pathway is encoded in the grey background and areas with better data coverage are shown with a lighter background. The visualistion  is interactive and allows the user to zoom and filter to explore groups in more detail and hovering over individual items will bring up a description of the data source. 
 
 ## Authors
 
-* **Toby Rubenstein** - on[GitHub](https://github.com/trubens71)
+* **Toby Rubenstein** - on [GitHub](https://github.com/trubens71)
 * **Fiona Grimm** - on [Twitter](https://twitter.com/fiona_grimm) or [GitHub](https://github.com/fiona-grimm)
 
 ## License
