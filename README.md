@@ -4,7 +4,7 @@
 
 ## Project Description
 
-Before the COVID-19 outbreak, the Health Foundation collaborated with researchers from City University London to map and visualise sources of open data across the adult social care pathway. This project aimed to collate information on the availability, timeliness, coverage and quality of public data sources, to match these against stakeholder groups and information requirements. The aim was to create informative visualisations on data availability and gaps to investigate the following in order to raise the profile of adult social care statistics to inform action:
+Before the COVID-19 outbreak, the Health Foundation collaborated with researchers from City, University of London to map and visualise sources of open data across the adult social care pathway. This project aimed to collate information on the availability, timeliness, coverage and quality of public data sources, to match these against stakeholder groups and information requirements. The aim was to create informative visualisations on data availability and gaps to investigate the following in order to raise the profile of adult social care statistics to inform action:
 
 1. What is the extent of the data that are publically available with regards to Adult Social Care
 in England?
