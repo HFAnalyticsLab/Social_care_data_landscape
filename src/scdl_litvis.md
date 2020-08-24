@@ -1,11 +1,4 @@
 ---
-# The code, written in elm, uses litvis and elm-vegalite to generate a vega-lite
-# visualisation specification. In a litvis preview (in Atom or VS-Code),
-# the vega-lite specification json is output below the rendering of the
-# visualisation. For more info see:
-# - https://github.com/gicentre/litvis
-# - https://github.com/gicentre/elm-vegalite
-
 id: litvis
 
 elm:
@@ -20,6 +13,8 @@ elm:
 import Tidy exposing (..)
 import VegaLite exposing (..)
 ```
+
+The code, written in elm, uses [litvis](https://github.com/gicentre/litvis) and [elm-vegalite](https://github.com/gicentre/elm-vegalite) to generate a vega-lite visualisation specification. In a litvis preview (in Atom or VS-Code), the vega-lite specification json is output below the rendering of the visualisation.
 
 # Adult Social Care in England - How much do we know?
 
