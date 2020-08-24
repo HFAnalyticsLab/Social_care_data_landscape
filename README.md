@@ -31,7 +31,7 @@ This interactive, exploratory [visualisation](https://hfanalyticslab.github.io/S
 - The [src](src) folder contains:
   - A python notebook to preprocess the csv files into a single joined form, suitable for the visualisation. The joined file is written back to the [data](data) directory.
   - A markdown file containing elm code to generate a [Vega-Lite](https://vega.github.io/vega-lite/) visualisation specification. The markdown file is dependent on [litvis](https://github.com/gicentre/litvis) and [elm-vegalite](https://github.com/gicentre/elm-vegalite) from the [giCentre](https://github.com/gicentre) at City, University of London. 
-- The [site](site) directory contains the resulting [Vega-Lite](https://vega.github.io/vega-lite/) and an html page to render the visualisation with [Vega Embed](https://github.com/vega/vega-embed).
+- The [site](site) directory contains the resulting [Vega-Lite](https://vega.github.io/vega-lite/) specification and an html page to render the visualisation with [Vega Embed](https://github.com/vega/vega-embed).
 
 ## Authors
 
