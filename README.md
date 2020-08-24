@@ -10,7 +10,7 @@ Before the COVID-19 outbreak, the Health Foundation collaborated with researcher
 in England?
 2. How much can the data tell us about funding and provision of services, the workforce and
 unpaid carers who deliver services, and ultimately the users of the services?
-3. Do those data su􀁽ciently inform us about the needs, the care system performance and the
+3. Do those data sufficiently inform us about the needs, the care system performance and the
 outcomes?
 4. What can we say about the quality of available data?
 
@@ -22,7 +22,16 @@ Data sources were identified through the report listed in the References section
 
 ## Visualisations 
 
-This interactive, exploratory [visualisation](https://hfanalyticslab.github.io/Social_care_data_landscape/site/scdl_vis.html) shows our attempt to visualise the complex nature of available measures on adult social care. Individual measures are mapped against the adult social care pathway on three levels with inceasing granularity. At level 1, this consists of the main service and stakeholder groups including users, unpaid carers, workforce, the provided service, providers and funders. Vertical lines  show how measures can be used to explore relationships  between different parts of the social care pathway. Measures are grouped according to whether they relate to demand, supply, operations or outcome and the opacity is based simple scoring algorithm for measure strength based  on population  or survey size, time lag and geographical  resolution. The number of measures related to each parth of the pathway is encoded in the grey background and areas with better data coverage are shown with a lighter background. The visualistion  is interactive and allows the user to zoom and filter to explore groups in more detail and hovering over individual items will bring up a description of the data source. 
+This interactive, exploratory [visualisation](https://hfanalyticslab.github.io/Social_care_data_landscape/site/scdl_vis.html) shows our attempt to visualise the complex nature of available measures on adult social care. Individual measures are mapped against the adult social care pathway on three levels with increasing granularity. At level 1, this consists of the main service and stakeholder groups including users, unpaid carers, workforce, the provided service, providers and funders. Vertical lines show how measures can be used to explore relationships between different parts of the social care pathway. Measures are grouped according to whether they relate to demand, supply, operations or outcome and the opacity is based on a simple scoring algorithm for measure strength based on population or survey size, time lag and geographical resolution. The number of measures related to each path of the pathway is encoded in the grey background and areas with better data coverage are shown with a lighter background. The visualistion is interactive and allows the user to zoom and filter to explore groups in more detail and hovering over individual items will bring up a description of the data source. The horizontal sort order of the vertical measure lines can be changed from measure strength to a bitmap of demand|supply|operations|outcome, with the latter pushing demand-related measures to the left and outcome-related measures to the right hand side. 
+
+## How does it work?
+
+- The [data](data) folder contains three csv files containing the pathway (domain model), the publicly available measures, and the mappings between them.
+- The [data model](data_model) folder contains a view of the underlying data structure and attributes, including the [plantuml](https://plantuml.com/) script which creates the image.
+- The [src](src) folder contains:
+  - A python notebook to preprocess the csv files into a single joined form, suitable for the visualisation. The joined file is written back to the [data](data) directory.
+  - A markdown file containing elm code to generate a [Vega-Lite](https://vega.github.io/vega-lite/) visualisation specification. The markdown file is dependent on [litvis](https://github.com/gicentre/litvis) and [elm-vegalite](https://github.com/gicentre/elm-vegalite) from the [giCentre](https://github.com/gicentre) at City, University of London. 
+- The [site](site) directory contains the resulting [Vega-Lite](https://vega.github.io/vega-lite/) and an html page to render the visualisation with [Vega Embed](https://github.com/vega/vega-embed).
 
 ## Authors
 
